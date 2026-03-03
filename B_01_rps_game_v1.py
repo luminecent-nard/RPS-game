@@ -1,4 +1,4 @@
-import time
+import random
 from time import sleep
 
 
@@ -71,6 +71,25 @@ if you dont then FIGURE IT OUT!
 (press <xxx> to exit the game at any time)
     """)
 
+def rps_compare(user,bot):
+
+    if user == bot:
+        result = "tie"
+
+    elif user == "rock" and bot == "scissors":
+        result = "win"
+    elif user == "paper" and bot == "rock":
+        result = "win"
+    elif user == "scissors" and bot == "paper":
+        result = "win"
+
+    else:
+        result = "lose"
+
+
+
+    return result
+
 #main routine
 
 #int game variables
@@ -86,7 +105,7 @@ print()
 #ask user if they want the instructions
 want_instructions = string_checker("do you want the instructions: ")
 print()
-sleep(0.2)
+
 #display instructions if the user wants to see
 if want_instructions == "yes":
     instructions()
@@ -94,7 +113,7 @@ if want_instructions == "yes":
 #ask user for number of rounds / infinite mode
 num_rounds = integer_checker("how many rounds do you want to play (press <enter> for infinite): ")
 print()
-sleep(0.2)
+
 if num_rounds == "infinite":
     mode = "infinite"
     num_rounds = 5
@@ -112,16 +131,36 @@ while rounds_played < num_rounds:
     #get user choice
     user_choice = string_checker("choose: ", rps_list)
     print()
-    sleep(0.2)
+
     print("you chose", user_choice)
+    sleep(0.5)
     print()
-    sleep(0.3)
+    print("bot chose #####")
+    sleep(0.6)
+    print()
 
 
     #exit code
     if user_choice == "xxx":
         break
+    #randomly choose from the rps list (excluding the exit code)
+    bot_choice = random.choice(rps_list[:-1])
 
+    #compare user and bot choice
+    result = rps_compare(user_choice, bot_choice)
+    #print result
+    sleep(0.2)
+    print("ROCK")
+    sleep(0.4)
+    print("PAPER")
+    sleep(0.4)
+    print("SCISSORS")
+    sleep(0.4)
+    print()
+    print(f"{user_choice} vs {bot_choice}, you {result}")
+    print()
+
+    #makes the rounds progress
     rounds_played += 1
 
     #if users are in infinite mode increase number of rounds
