@@ -37,8 +37,8 @@ def make_statement(statement, decoration):
 
     return ""
 
-def string_checker(question, valid_ans=('yes', 'no')):
-    error = f"please enter a valid option from the following list: {valid_ans}"
+def string_checker(question, valid_ans=('yes', 'no','no')):
+    error = f"please enter a valid option from the following list: {valid_ans [:-1]}"
     while True:
         user_response = input(question).lower()
         for item in valid_ans:
@@ -97,8 +97,8 @@ mode = "regular"
 rounds_played = 0
 rounds_tied = 0
 rounds_lost = 0
-yes_no_list = ["yes","no"]
-rps_list = ["rock","paper","scissors","xxx"]
+yes_no_list = ["yes","no","filler"]
+rps_list = ["rock","paper","scissors","xxx","a valid option"]
 game_history = []
 
 make_statement(f"ROCK, PAPER, SCISSORS"," _/¯\_")
@@ -132,12 +132,19 @@ while rounds_played < num_rounds:
         rounds_heading = make_statement(f"Round {rounds_played + 1} of {num_rounds}","-")
 
     bot_choice = random.choice(rps_list[:-1])
-    print(bot_choice)
+
     #get user choice
     user_choice = string_checker("choose: ", rps_list)
     print()
 
-
+    #self-destruct for funny
+    if user_choice == "a valid option":
+        print("you think your smart?")
+        print("well take that!")
+        print()
+        sleep(0.3)
+        self_destruct = 0/0
+        print(self_destruct)
 
     #exit code
     if user_choice == "xxx":
